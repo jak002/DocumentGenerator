@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="assets/style.css">
+    </head>
+    <body>
+        <header class="spread">
+            <div>
+            <div>
+                <img src="assets/logo.png">
+            </div>
+            </div>
+            <p class="date">{{date}}</p>
+        </header>
+        <hr>
+        <p>Kære {{name}}</p>
+        <p>Dette er din faktura for November 2025. Nedenfor kan du se hvordan service prisen er beregnet.</p>
+        <br>
+        <table class="items">
+            <thead>
+                <tr>
+                    <th class="servicename">Service navn</th>
+                    <th>Antal timer</th>
+                    <th>Pris per time</th>
+                    <th>Totalpris per service</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each bills}}
+                <tr>
+                    <td class="servicename">{{this.name}}</td>
+                    <td>{{this.hours}}</td>
+                    <td>{{String.Format this.price "C"}}</td>
+                    <td>{{String.Format (Math.Multiply this.price this.hours) "C"}}</td>
+                </tr>
+                {{/each}}
+                </tbody>
+                </table>
+                <br>
+                <table class="total">
+                <tr>
+                    <td class="servicename">Subtotal:</td>
+                    <td>{{String.Format total "C"}}</td>
+                </tr>
+                <tr>
+                    <td class="servicename">Heraf moms:</td>
+                    <td>{{String.Format (Math.Divide total 4) "C"}}</td>
+                </tr>
+                <tr>
+                    <td class="servicename">I alt:</td>
+                    <td>{{String.Format total "C"}}</td>
+                </tr>
+        </table>
+        <br>
+        <p>Dette beløb betales senest {{paymentDue}}.</p>
+        {{#if paidAutomatically}}
+        <p>Dette beløb er automatisk blevet betalt.</p>
+        {{/if}}
+        <br>
+        <p>Med venlig hilsen</p>
+        <hr>
+        <footer class="spread">
+            <h2>Firma A/S</h2>
+            <div>
+            <p>Addressevej 27h</p>
+            <p>2000 Frederiksberg</p>
+            </div>
+        </footer>
+    </body>
+</html>

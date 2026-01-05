@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@page {
+    margin: 15mm 10mm 15mm 10mm;
+    @bottom-right {
+        content: "Side " counter(page) " af " counter(pages);
+    }
+}
+
+* {
+    font-family:  "Montserrat", Arial, Helvetica, sans-serif;
+}
+h2 {
+    font-weight: 800;
+}
+p {
+    page-break-inside: avoid;
+}
+            .spread {
+                display:flex; justify-content:space-between;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            td {
+                border-top: 1px solid #ddd; text-align:end; padding: 0.4rem;
+            }
+            th {
+                padding-inline: 0.5rem;
+                text-align: end;
+            }
+            .servicename {
+                text-align: start;
+            }
+            .items tr:nth-child(even) {
+                background-color: #eeefff;
+            }
+            footer {
+                color: #555888;
+            }
+
+            .total {
+                font-weight: 600;
+            }
+            .date {
+                font-weight: 200;
+            }
+            .zinger {
+                background-color: #eeefff;
+                width: 60%;
+                padding: 1rem;
+                font-size: 40px;
+                font-weight: 700;
+                color: #555888;
+            }
+            .quotation {
+                font-size: 15px;
+                font-weight: 400;
+                font-style: italic;
+            }

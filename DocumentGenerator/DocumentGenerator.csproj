@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cottle" Version="2.1.0" />
+    <PackageReference Include="Handlebars.Net" Version="2.1.6" />
+    <PackageReference Include="Handlebars.Net.Helpers" Version="2.5.3" />
+    <PackageReference Include="Haukcode.WkHtmlToPdfDotNet" Version="1.5.96-PR-master-1ec01246" />
+    <PackageReference Include="HtmlRenderer.PdfSharp" Version="1.5.1" />
+    <PackageReference Include="IronPdf" Version="2025.11.12" />
+    <PackageReference Include="RazorLight" Version="2.3.1" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.39.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.1" />
+    <PackageReference Include="Weasyprint.Wrapped" Version="7.0.1" />
+  </ItemGroup>
+
+	<Target Name="CopyWeasyZipsToConsumer" BeforeTargets="CopyFilesToOutputDirectory" Outputs="">
+		<ItemGroup>
+			<WeasyZips Include="$(MSBuildThisFileDirectory)standalone-*.zip" />
+		</ItemGroup>
+
+		<Copy SourceFiles="@(WeasyZips)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+	</Target>
+
+	<ItemGroup>
+	  <Content Update="C:\Users\krell\.nuget\packages\weasyprint.wrapped\7.0.1\contentFiles\any\any\standalone-linux-64.zip">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="C:\Users\krell\.nuget\packages\weasyprint.wrapped\7.0.1\contentFiles\any\any\standalone-windows-64.zip">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+</Project>
