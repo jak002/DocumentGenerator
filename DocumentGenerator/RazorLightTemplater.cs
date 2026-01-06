@@ -13,6 +13,7 @@ namespace DocumentGenerator
 {
     public class RazorLightTemplater : ITemplaterStrategy
     {
+        // Caching konfigureres her. Denne opsætning er mere eller mindre "ingen opsætning", hvor templateren bruger sig selv som caching resource.
         private RazorLightEngine engine = new RazorLightEngineBuilder()
             .UseEmbeddedResourcesProject(typeof(RazorLightTemplater).Assembly)
             .SetOperatingAssembly(typeof(RazorLightTemplater).Assembly)
@@ -21,11 +22,14 @@ namespace DocumentGenerator
 
         public string GenerateDocument(string template, Dictionary<string, object> values)
         {
+            // Dictionary omdannes til objekt med alle values som properties.
             var valueObject = new ExpandoObject();
+            // Hver entry i dictionary tilføjes bagefter.
             foreach (var kvp in values)
             {
                 valueObject.TryAdd(kvp.Key, kvp.Value);
             }
+            // Check cache...
             var cacheResult = engine.Handler.Cache.RetrieveTemplate("templateKey");
             if (cacheResult.Success)
             {
@@ -34,6 +38,7 @@ namespace DocumentGenerator
                     .GetAwaiter()
                     .GetResult();
             }
+            // Metode cacher automatisk under den givne cache key.
             return Task.Run(async () => await engine.CompileRenderStringAsync("templateKey", template, valueObject))
                 .GetAwaiter()
                 .GetResult(); 

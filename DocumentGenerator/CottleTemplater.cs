@@ -15,7 +15,9 @@ namespace DocumentGenerator
             Dictionary<Value, Value> cottleDict = new Dictionary<Value, Value>();
             foreach (var entry in originalDict)
             {
+                // Vi kan antage at keys altid kan læses som strings.
                 string key = entry.Key;
+                // Value kan være alt fra simple typer til enumerables, så parsing behøves.
                 Value value = NativeTypeToCottleValue(entry.Value);
                 cottleDict.Add(key, value);
             }
@@ -49,6 +51,7 @@ namespace DocumentGenerator
                     List<Value> valueList = new List<Value>();
                     foreach (var i in list)
                     {
+                        // Type kendes ikke - skal derfor igennem samme switch for at blive Value.
                         valueList.Add(NativeTypeToCottleValue(i));
                     }
                     return valueList;
@@ -63,10 +66,12 @@ namespace DocumentGenerator
             try
             {
                 Dictionary<Value, Value> dict = ParseDictionaryToCottle(values);
+                // Check om template er cachet...
                 if (template != priortemplate)
                 {
                     var documentResult = Document.CreateDefault(template);
                     currentTemplate = documentResult.DocumentOrThrow;
+                    // Sæt ny template i cache.
                     priortemplate = template;
                 }
                 var context = Context.CreateBuiltin(dict);

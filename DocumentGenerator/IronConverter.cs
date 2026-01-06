@@ -18,6 +18,7 @@ namespace DocumentGenerator
 
         public byte[] Convert(string document, string assetsUrl)
         {
+            // Headers og footers skal oprettes separat fra dokument.
             TextHeaderFooter header = new TextHeaderFooter
             {
                 RightText = DateTime.Now.ToString()
@@ -29,7 +30,9 @@ namespace DocumentGenerator
             };
             _renderer.RenderingOptions.WaitFor.AllFontsLoaded();
 
+            //Dokument konverteres først...
             var pdf = _renderer.RenderHtmlAsPdf(document, assetsUrl);
+            // Header og footer tilføjes bagefter.
             pdf.AddTextHeaders(header);
             pdf.AddTextFooters(footer);
 
