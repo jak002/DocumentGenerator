@@ -61,12 +61,12 @@ Dictionary<string, object> htmlObjects = new Dictionary<string, object>
 
 Dictionary<string, object> htmlObjectsLogicLess = ParseForHandlebars(htmlObjects);
 
-//WriteDocumentToDisk(bill, document, htmlObjectsLogicLess, assetUrl, new WeasyConverter(), "Weasy");
-//WriteDocumentToDisk(bill, document, htmlObjectsLogicLess, assetUrl, new IronConverter(), "Iron");
-//WriteDocumentToDisk(bill, document, htmlObjectsLogicLess, assetUrl, new SeleniumConverter(), "Browser");
-//WriteDocumentToDisk(bill, document, htmlObjectsLogicLess, assetUrl, new PdfSharpConverter(), "PdfSharp");
+WriteDocumentToDisk(bill, document, htmlObjectsLogicLess, assetUrl, new WeasyConverter(), "WeasyPrint");
+WriteDocumentToDisk(bill, document, htmlObjectsLogicLess, assetUrl, new IronConverter(), "IronPDF");
+WriteDocumentToDisk(bill, document, htmlObjectsLogicLess, assetUrl, new SeleniumConverter(), "Browser");
+WriteDocumentToDisk(bill, document, htmlObjectsLogicLess, assetUrl, new PdfSharpConverter(), "PdfSharp");
 
-PerformancePdfTest(htmlObjectsLogicLess, bill, assetUrl);
+//PerformancePdfTest(htmlObjectsLogicLess, bill, assetUrl);
 
 //File.WriteAllText("faktura_razorlight_result.html", razorlight.GenerateDocument(razorLightTemplate, htmlObjects));
 
@@ -315,9 +315,11 @@ static void PerformancePdfTest(Dictionary<string, object> htmlObjects, string te
 static void WriteDocumentToDisk(string bill, string document, Dictionary<string, object> htmlObjectsLogicLess, string assetUrl, IConverterStrategy converter, string outputName)
 {
     DocumentGenerator.DocumentGenerator.SetConverter(converter);
-
+    Console.WriteLine($"Generating bill with {outputName}...");
     byte[] resultbill = DocumentGenerator.DocumentGenerator.Generate(bill, htmlObjectsLogicLess, assetUrl);
     File.WriteAllBytes($"{outputName}Bill.pdf", resultbill);
+    Console.WriteLine($"Bill generated. Generating document with {outputName}...");
     byte[] result = DocumentGenerator.DocumentGenerator.Generate(document, htmlObjectsLogicLess, assetUrl);
     File.WriteAllBytes($"{outputName}Document.pdf", result);
+    Console.WriteLine($"All documents successfully generated with {outputName}!");
 }
