@@ -18,7 +18,7 @@ This is the main component. Copy this over (or parts of it) or add a reference t
 - *Selenium:* This is the default converter, using an automated chrome browser to handle conversion. I consider this to be a healthy middle-ground between performance, compatibility, and functionality. Keep in mind that it is rather opinionated on relative filepaths for assets.
 - *WeasyPrint:* Provides more functionality in terms of PDF standards. Keep in mind that this only works on Windows and Linux though, and requires explicit copying of its python engine (standalone-linux-64, standalone-windows-64, version-7.0.1), either through project properties or by hand.
 It is also remarkably slower than Selenium and uses its own CLI syntax. See https://doc.courtbouillon.org/weasyprint/stable/index.html for documentation.
-- *IronPDF:* The trial license on this is expired, so do with it what you please.
+- *IronPDF:* Needs a license, and my trial is expired sooo... do with it what you please.
 - *HtmlRenderer/PDFSharp:* Supports way less CSS, as it's a bit of a hacked together implementation of a package not intended to render HTML files. Don't expect results to reflect your HTML styling. It is blazingly fast though.
 - *WkHtmlToPdf:* Doesn't work.
 
