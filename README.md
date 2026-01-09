@@ -24,4 +24,4 @@ It is also remarkably slower than Selenium and uses its own CLI syntax. See http
 
 This component is intended to be used through the **Generate** method in the main class. Without any setup, this simply uses defaults for templating and conversion. If you wish to use other implementations, these are passed through **SetTemplater** and **SetConverter** methods. The resulting byte array can be saved to file, sent elsewhere, done whatever you want with.
 
-Along with this, this solution also contains functionality tests (DocumentGeneratorTests) and a performance test/console implementation (GeneratorConsole). These are not necessary to copy over, but you can peruse them for ideas on how to use this component if you want.
+Along with this, this solution also contains functionality tests (DocumentGeneratorTests) and a performance test/console implementation (GeneratorConsole), where all the HTML/CSS assets i've used to test this component are located. These are not necessary to copy over, but you can peruse them for ideas on how to use this component if you want.
